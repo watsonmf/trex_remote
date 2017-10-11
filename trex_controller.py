@@ -1,4 +1,4 @@
-
+import json
 from .trex_stl_lib.api import *
 
 
@@ -8,19 +8,20 @@ class TRexController(object):
 	"""
 	
 	def __init__(self, trex_server_ip = '127.0.0.1'):
+		pass
 		self.trex_client = STLClient(server = trex_server_ip)
 		self.flows  = {"flow1": TCPFlow(trex_client = self.trex_client, 
-													tx_port = 0, rx_port = 1,
-													client_ip = "19.0.0.1",
-													client_port = 19000,
-													server_ip = "19.0.0.19",
-													server_port = 19019),
+									tx_port = 0, rx_port = 1,
+									client_ip = "19.0.0.1",
+									client_port = 19000,
+									server_ip = "19.0.0.19",
+									server_port = 19019),
 							"flow2": TCPFlow(trex_client = self.trex_client, 
-													tx_port = 2, rx_port = 3,
-													client_ip = "19.0.1.1",
-													client_port = 19100,
-													server_ip = "19.0.1.19",
-													server_port = 19119) }
+									tx_port = 2, rx_port = 3,
+									client_ip = "19.0.1.1",
+									client_port = 19100,
+									server_ip = "19.0.1.19",
+									server_port = 19119) }
 		
 		
 	def __startFlow(self, flow: TCPFlow, rate = 1, force = False):
@@ -36,7 +37,8 @@ class TRexController(object):
 		self.trex_client.stop(ports = [flow.tx_port, flow.rx_port])
 	
 	def parseCommand(self, json_object):
-		pass
+		test = json.loads(json_object)
+		print(test['command'])
 	
 	
 	
